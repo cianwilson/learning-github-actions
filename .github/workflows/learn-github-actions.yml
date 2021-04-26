@@ -14,18 +14,13 @@ jobs:
   which_branch:
     runs-on: ubuntu-latest
     steps:
-      # extract branch name
-      - name: Branch name
-        if: github.event_name != 'pull_request'
-        run: echo "name=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
-
-      # extract branch name on pull request
-      - name: PR branch name
-        if: github.event_name == 'pull_request'
-        run: echo "name=${GITHUB_REF}" >> $GITHUB_ENV
+      - name: Get Name
+        run: echo "name=${GITHUB_REF#refs/}" >> $GITHUB_ENV
 
       # print branch name
       - name: Get branch name
-        run: echo 'The branch name is' ${{ env.name }}
+        run: |
+             echo 'The tag name is' ${{ env.name }}
+             echo 'Another way?' ${{ github.ref#refs/ }}
 
 
