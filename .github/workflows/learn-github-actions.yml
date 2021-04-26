@@ -1,11 +1,12 @@
 name: learn-github-actions
-on: [push]
+on: [push, pull_request]
 jobs:
   check-bats-version:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: echo ${{ github.ref }}
+      - name: Get Ref
+        run: echo ${{ github.ref }}
       - run: echo ${{ github.sha }}
       - uses: actions/setup-node@v1
       - run: npm install -g bats
