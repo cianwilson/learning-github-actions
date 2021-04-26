@@ -21,6 +21,6 @@ jobs:
       - name: Get branch name
         run: |
              echo 'The tag name is' ${{ env.name }}
-             echo 'Another way?' ${{ github.ref#refs/ }}
+             echo 'Another way?' ${{ github.ref }}
 
 
