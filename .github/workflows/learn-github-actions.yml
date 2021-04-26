@@ -15,12 +15,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Get Name
-        run: echo "name=${GITHUB_REF//\//_}" >> $GITHUB_ENV
+        run: echo "name=$(echo ${GITHUB_REF//\//_} | cut -c 6-)" >> $GITHUB_ENV
 
       # print branch name
       - name: Print name
         run: |
              echo 'The tag name is' ${{ env.name }}
-             echo 'Another way? ${GITHUB_REF#refs/}'
 
 
