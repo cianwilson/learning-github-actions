@@ -15,6 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Get Name
+        shell: bash
         run: |
              norefname="${GITHUB_REF#refs/}"
              noslashname="${norefname/\//_}"
