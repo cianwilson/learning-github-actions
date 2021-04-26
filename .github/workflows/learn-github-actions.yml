@@ -15,20 +15,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # extract branch name
-      - name: Extract branch name
+      - name: Branch name
         if: github.event_name != 'pull_request'
         shell: bash
         run: echo "name=echo ${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
         id: extract_branch
 
       # extract branch name on pull request
-      - name: Print branch name
+      - name: PR branch name
         if: github.event_name == 'pull_request'
         shell: bash
         run: echo "name=pr"
 
       # print branch name
       - name: Get branch name
-        run: echo 'The branch name is' env.name
+        run: echo 'The branch name is' ${{ env.name }}
 
 
