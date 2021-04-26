@@ -16,8 +16,8 @@ jobs:
     steps:
       - name: Get Name
         run: |
-             norefname=${GITHUB_REF/#refs\//}
-             noslashname=${norefname/\//_}
+             norefname="${GITHUB_REF/#refs\//}"
+             noslashname="${norefname/\//_}"
              echo "$noslashname" >> $GITHUB_ENV
 
       # print branch name
