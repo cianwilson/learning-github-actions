@@ -30,16 +30,15 @@ jobs:
           pwd
           git clone https://bitbucket.org/tferma/petsc.git
           cd petsc
-          ./configure --with-clanguage=C++ \
-                      --with-shared-libraries=1 \
-                      --download-suitesparse=1 \
-                      --download-hypre=1 \
-                      --download-ml=1 \
-                      --download-parmetis=1 \
-                      --download-metis=1 \
-                      --download-blacs=1 \
-                      --download-scalapack=1 \
-                      --download-mumps=1 \
-                      --with-debugging=0
+          ./configure --with-shared-libraries=1 \
+                      --download-suitesparse=0 \
+                      --download-hypre=0 \
+                      --download-ml=0 \
+                      --download-parmetis=0 \
+                      --download-metis=0 \
+                      --download-blacs=0 \
+                      --download-scalapack=0 \
+                      --download-mumps=0 \
+                      --with-debugging=1
 
 
