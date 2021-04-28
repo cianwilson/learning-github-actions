@@ -42,7 +42,9 @@ jobs:
                       --with-debugging=1
 
       - uses: actions/upload-artifact@v2
+        if: always()
         with:
+          name: configure
           path: petsc/configure.log
 
 
