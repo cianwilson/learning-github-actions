@@ -28,7 +28,7 @@ jobs:
       - name: PETSc Install
         run : |
           pwd
-          git clone https://bitbucket.org/tferma/petsc.git
+          git clone -b v3.14.6 -q https://gitlab.com/petsc/petsc.git
           cd petsc
           ./configure --with-shared-libraries=1 \
                       --download-suitesparse=0 \
