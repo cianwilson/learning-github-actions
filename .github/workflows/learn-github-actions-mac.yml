@@ -31,6 +31,7 @@ jobs:
 
       - name: PETSc Install
         run : |
+          export INSTALL_PREFIX=$PWD/install
           type gfortran-10
           ln -s `which gfortran-10` /usr/local/bin/gfortran
           type gfortran
@@ -58,6 +59,7 @@ jobs:
                               --prefix=../../install
           make PETSC_DIR=$PWD PETSC_ARCH=arch-darwin-c-debug all
           make PETSC_DIR=$PWD PETSC_ARCH=arch-darwin-c-debug install
+          make PETSC_DIR=$INSTALL_PREFIX PETSC_ARCH="" check
 
       - uses: actions/upload-artifact@v2
         if: always()
