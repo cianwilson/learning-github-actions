@@ -26,12 +26,14 @@ jobs:
           pwd
           brew install pygobject3 adwaita-icon-theme gtksourceview3 \
                        coreutils autogen ginac cppunit eigen boost \
-                       vtk openmpi gmsh jing-trang gcc
+                       vtk openmpi gmsh jing-trang
           pip3 install numpy matplotlib scipy lxml sympy
 
       - name: PETSc Install
         run : |
-          alias gfortran=gfortran-10
+          type gfortran-10
+          ln -s `which gfortran-10` /usr/local/bin/gfortran
+          type gfortran
           type mpif90
           mpif90 --version
           pwd
