@@ -31,6 +31,7 @@ jobs:
 
       - name: PETSc Install
         run : |
+          alias gfortran=gfortran-10
           type mpif90
           mpif90 --version
           pwd
