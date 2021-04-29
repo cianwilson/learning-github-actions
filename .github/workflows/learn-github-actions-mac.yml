@@ -57,7 +57,7 @@ jobs:
                               --with-debugging=1 \
                               --prefix=../../install
           make PETSC_DIR=$PWD PETSC_ARCH=arch-darwin-c-debug all
-
+          make PETSC_DIR=$PWD PETSC_ARCH=arch-darwin-c-debug install
 
       - uses: actions/upload-artifact@v2
         if: always()
