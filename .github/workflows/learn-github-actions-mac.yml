@@ -31,6 +31,8 @@ jobs:
 
       - name: PETSc Install
         run : |
+          type mpif90
+          mpif90 --version
           pwd
           mkdir -p deps
           cd deps
