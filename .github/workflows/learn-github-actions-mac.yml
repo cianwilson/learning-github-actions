@@ -84,7 +84,7 @@ jobs:
           cd ffc
           pip3 install --prefix=$INSTALL_PREFIX .
           cd ..
-          git clone -b tferma-master-2019.1.0 -q https://bitbucket.org/tferma/dolfin.git
+          GIT_LFS_SKIP_SMUDGE=1 git clone -b tferma-master-2019.1.0 -q https://bitbucket.org/tferma/dolfin.git
           cd dolfin
           mkdir build
           cd build
