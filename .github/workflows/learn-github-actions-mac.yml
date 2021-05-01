@@ -26,8 +26,9 @@ jobs:
           pwd
           brew install pygobject3 adwaita-icon-theme gtksourceview3 \
                        coreutils autogen ginac cppunit eigen boost \
-                       openmpi gmsh jing-trang openblas hdf5
+                       openmpi gmsh jing-trang openblas
           pip3 install numpy matplotlib scipy lxml sympy
+          brew install -s hdf5
           EDITOR=cat brew edit hdf5
 
       - name: PETSc Install
