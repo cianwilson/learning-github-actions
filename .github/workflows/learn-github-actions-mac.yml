@@ -28,7 +28,7 @@ jobs:
                        coreutils autogen ginac cppunit eigen \
                        openmpi gmsh jing-trang openblas hdf5@1.10
           pip3 install numpy matplotlib scipy lxml sympy
-          brew install -s boost@1.60
+          brew install -s boost
 
       - name: PETSc Install
         run : |
