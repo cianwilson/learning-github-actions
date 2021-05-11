@@ -25,7 +25,7 @@ jobs:
         run : |
           pwd
           brew install pygobject3 adwaita-icon-theme gtksourceview3 \
-                       coreutils autogen ginac cppunit eigen boost \
+                       coreutils autogen ginac cppunit eigen boost@1.60 \
                        openmpi gmsh jing-trang openblas hdf5@1.10
           pip3 install numpy matplotlib scipy lxml sympy
 
