@@ -26,90 +26,89 @@ jobs:
           pwd
           brew install pygobject3 adwaita-icon-theme gtksourceview3 \
                        coreutils autogen ginac cppunit eigen boost \
-                       openmpi gmsh jing-trang openblas
+                       openmpi gmsh jing-trang openblas hdf5@1.10
           pip3 install numpy matplotlib scipy lxml sympy
-          brew install -s hdf5
           EDITOR=cat brew edit hdf5
 
-      #- name: PETSc Install
-      #  run : |
-      #    export INSTALL_PREFIX=$PWD/install
-      #    ln -s `which gfortran-10` /usr/local/bin/gfortran
-      #    mkdir -p deps
-      #    cd deps
-      #    git clone -b v3.14.6 -q https://gitlab.com/petsc/petsc.git
-      #    cd petsc
-      #    python3 ./configure --COPTFLAGS="-O0" \
-      #                        --CXXOPTFLAGS="-O0" \
-      #                        --FOPTFLAGS="-O0" \
-      #                        --with-shared-libraries=1 \
-      #                        --download-suitesparse=1 \
-      #                        --download-hypre=1 \
-      #                        --download-ml=1 \
-      #                        --download-parmetis=1 \
-      #                        --download-metis=1 \
-      #                        --download-blacs=1 \
-      #                        --download-scalapack=1 \
-      #                        --download-mumps=1 \
-      #                        --with-debugging=1 \
-      #                        --prefix=../../install
-      #    make PETSC_DIR=$PWD PETSC_ARCH=arch-darwin-c-debug all
-      #    make PETSC_DIR=$PWD PETSC_ARCH=arch-darwin-c-debug install
+      - name: PETSc Install
+        run : |
+          export INSTALL_PREFIX=$PWD/install
+          ln -s `which gfortran-10` /usr/local/bin/gfortran
+          mkdir -p deps
+          cd deps
+          git clone -b v3.14.6 -q https://gitlab.com/petsc/petsc.git
+          cd petsc
+          python3 ./configure --COPTFLAGS="-O0" \
+                              --CXXOPTFLAGS="-O0" \
+                              --FOPTFLAGS="-O0" \
+                              --with-shared-libraries=1 \
+                              --download-suitesparse=1 \
+                              --download-hypre=1 \
+                              --download-ml=1 \
+                              --download-parmetis=1 \
+                              --download-metis=1 \
+                              --download-blacs=1 \
+                              --download-scalapack=1 \
+                              --download-mumps=1 \
+                              --with-debugging=1 \
+                              --prefix=../../install
+          make PETSC_DIR=$PWD PETSC_ARCH=arch-darwin-c-debug all
+          make PETSC_DIR=$PWD PETSC_ARCH=arch-darwin-c-debug install
 
-      #- name: FEniCS Install
-      #  run : |
-      #    python3 --version
-      #    type python3
-      #    pip3 --version
-      #    type pip3
-      #    export PYTHONPATH=$INSTALL_PREFIX/lib/python3.9/site-packages:$PYTHONPATH
-      #    export PETSC_DIR=$INSTALL_PREFIX
-      #    export PATH=$INSTALL_PREFIX/bin:$PATH
-      #    export LD_LIBRARY_PATH=$INSTALL_PREFIX/lib:$LD_LIBRARY_PATH
-      #    export LIBRARY_PATH=$INSTALL_PREFIX/lib:$LIBRARY_PATH
-      #    export INCLUDE=$INSTALL_PREFIX/include:$INCLUDE
-      #    export PKG_CONFIG_PATH=$INSTALL_PREFIX/lib/pkgconfig:$PKG_CONFIG_PATH
-      #    cd deps
-      #    git clone -b tferma-master-2019.1.0 -q https://bitbucket.org/tferma/ufl.git
-      #    cd ufl
-      #    pip3 install --prefix=$INSTALL_PREFIX .
-      #    cd ..
-      #    git clone -b tferma-master-2019.1.0 -q https://bitbucket.org/tferma/fiat.git
-      #    cd fiat
-      #    pip3 install --prefix=$INSTALL_PREFIX .
-      #    cd ..
-      #    git clone -b tferma-master-2019.1.0 -q https://bitbucket.org/tferma/dijitso.git
-      #    cd dijitso
-      #    pip3 install --prefix=$INSTALL_PREFIX .
-      #    cd ..
-      #    git clone -b tferma-master-2019.1.0 -q https://bitbucket.org/tferma/ffc.git
-      #    cd ffc
-      #    pip3 install --prefix=$INSTALL_PREFIX .
-      #    cd ..
-      #    GIT_LFS_SKIP_SMUDGE=1 git clone -b tferma-master-2019.1.0 -q https://bitbucket.org/tferma/dolfin.git
-      #    cd dolfin
-      #    mkdir build
-      #    cd build
-      #    cmake -DCMAKE_BUILD_TYPE=Debug \
-      #          -DDOLFIN_ENABLE_CHOLMOD:BOOL=OFF \
-      #          -DDOLFIN_ENABLE_UMFPACK:BOOL=OFF \
-      #          -DDOLFIN_ENABLE_TRILINOS:BOOL=OFF \
-      #          -DDOLFIN_ENABLE_SLEPC:BOOL=OFF  \
-      #          -DMETIS_LIBRARY=${PETSC_DIR}/lib/libmetis.so \
-      #          -DPARMETIS_INCLUDE_DIRS=${PETSC_DIR}/include \
-      #          -DPARMETIS_LIBRARY=${PETSC_DIR}/lib/libparmetis.so \
-      #          -DCMAKE_INSTALL_PREFIX=${INSTALL_PREFIX} \
-      #          ../.
-      #    make
-      #    make install
-      #    cd ../python
-      #    pip3 install --prefix=$INSTALL_PREFIX .
+      - name: FEniCS Install
+        run : |
+          python3 --version
+          type python3
+          pip3 --version
+          type pip3
+          export PYTHONPATH=$INSTALL_PREFIX/lib/python3.9/site-packages:$PYTHONPATH
+          export PETSC_DIR=$INSTALL_PREFIX
+          export PATH=$INSTALL_PREFIX/bin:$PATH
+          export LD_LIBRARY_PATH=$INSTALL_PREFIX/lib:$LD_LIBRARY_PATH
+          export LIBRARY_PATH=$INSTALL_PREFIX/lib:$LIBRARY_PATH
+          export INCLUDE=$INSTALL_PREFIX/include:$INCLUDE
+          export PKG_CONFIG_PATH=$INSTALL_PREFIX/lib/pkgconfig:$PKG_CONFIG_PATH
+          cd deps
+          git clone -b tferma-master-2019.1.0 -q https://bitbucket.org/tferma/ufl.git
+          cd ufl
+          pip3 install --prefix=$INSTALL_PREFIX .
+          cd ..
+          git clone -b tferma-master-2019.1.0 -q https://bitbucket.org/tferma/fiat.git
+          cd fiat
+          pip3 install --prefix=$INSTALL_PREFIX .
+          cd ..
+          git clone -b tferma-master-2019.1.0 -q https://bitbucket.org/tferma/dijitso.git
+          cd dijitso
+          pip3 install --prefix=$INSTALL_PREFIX .
+          cd ..
+          git clone -b tferma-master-2019.1.0 -q https://bitbucket.org/tferma/ffc.git
+          cd ffc
+          pip3 install --prefix=$INSTALL_PREFIX .
+          cd ..
+          GIT_LFS_SKIP_SMUDGE=1 git clone -b tferma-master-2019.1.0 -q https://bitbucket.org/tferma/dolfin.git
+          cd dolfin
+          mkdir build
+          cd build
+          cmake -DCMAKE_BUILD_TYPE=Debug \
+                -DDOLFIN_ENABLE_CHOLMOD:BOOL=OFF \
+                -DDOLFIN_ENABLE_UMFPACK:BOOL=OFF \
+                -DDOLFIN_ENABLE_TRILINOS:BOOL=OFF \
+                -DDOLFIN_ENABLE_SLEPC:BOOL=OFF  \
+                -DMETIS_LIBRARY=${PETSC_DIR}/lib/libmetis.so \
+                -DPARMETIS_INCLUDE_DIRS=${PETSC_DIR}/include \
+                -DPARMETIS_LIBRARY=${PETSC_DIR}/lib/libparmetis.so \
+                -DCMAKE_INSTALL_PREFIX=${INSTALL_PREFIX} \
+                ../.
+          make
+          make install
+          cd ../python
+          pip3 install --prefix=$INSTALL_PREFIX .
 
       - uses: actions/upload-artifact@v2
         if: always()
         with:
           name: logs
-          path: /usr/local/Cellar/hdf5/1.12.0_3/include
+          path: deps/petsc/configure.log
           retention-days: 2
 
 
