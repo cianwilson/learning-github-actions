@@ -25,9 +25,10 @@ jobs:
         run : |
           pwd
           brew install pygobject3 adwaita-icon-theme gtksourceview3 \
-                       coreutils autogen ginac cppunit eigen boost@1.60 \
+                       coreutils autogen ginac cppunit eigen \
                        openmpi gmsh jing-trang openblas hdf5@1.10
           pip3 install numpy matplotlib scipy lxml sympy
+          brew install -s boost@1.60
 
       - name: PETSc Install
         run : |
