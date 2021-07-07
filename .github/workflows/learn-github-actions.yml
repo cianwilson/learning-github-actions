@@ -1,14 +1,31 @@
 name: learn-github-actions
-on: [push]
+on: [push, pull_request]
 jobs:
   check-bats-version:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: echo ${{ github.ref }}
+      - name: Get Ref
+        run: echo ${{ github.ref }}
       - run: echo ${{ github.sha }}
       - uses: actions/setup-node@v1
       - run: npm install -g bats
       - run: bats -v
+  which_branch:
+    runs-on: ubuntu-latest
+    steps:
+      # extract branch name
+      - name: Branch name
+        if: github.event_name != 'pull_request'
+        run: echo "name=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
+
+      # extract branch name on pull request
+      - name: PR branch name
+        if: github.event_name == 'pull_request'
+        run: echo "name=${GITHUB_REF}" >> $GITHUB_ENV
+
+      # print branch name
+      - name: Get branch name
+        run: echo 'The branch name is' ${{ env.name }}
 
 
