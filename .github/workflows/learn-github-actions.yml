@@ -1,14 +1,25 @@
 name: learn-github-actions
-on: [push]
+on: [push, pull_request]
 jobs:
   check-bats-version:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: echo ${{ github.ref }}
+      - name: Get Ref
+        run: echo ${{ github.ref }}
       - run: echo ${{ github.sha }}
       - uses: actions/setup-node@v1
       - run: npm install -g bats
       - run: bats -v
+  which_branch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Name
+        run: echo "name=$(echo ${GITHUB_REF//\//_} | cut -c 6-)" >> $GITHUB_ENV
+
+      # print branch name
+      - name: Print name
+        run: |
+             echo 'The tag name is' ${{ env.name }}
 
 
